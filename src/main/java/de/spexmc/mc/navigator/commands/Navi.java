@@ -18,7 +18,9 @@ public class Navi implements CommandExecutor {
   public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
     if (checkPlayer(sender) && checkWaypointsExists(sender)) {
       final Player playerSender = (Player) sender;
-      playerSender.openInventory(NavigatorManager.determineInventory());
+      if (!NavigatorManager.checkNaviInInventory(playerSender)) {
+        playerSender.getInventory().addItem(NavigatorManager.getNavi());
+      }
     }
     return false;
   }
