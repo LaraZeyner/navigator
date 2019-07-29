@@ -1,14 +1,14 @@
-package de.spexmc.mc.template.util;
+package de.spexmc.mc.navigator.util;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import de.spexmc.mc.template.storage.Messages;
+import de.spexmc.mc.navigator.storage.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 /**
- * Created by Lara on 20.07.2019 for template
+ * Created by Lara on 20.07.2019 for navigator
  */
 public final class Messenger {
   private static final Logger logger;

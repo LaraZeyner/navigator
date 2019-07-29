@@ -1,21 +1,23 @@
-package de.spexmc.mc.template.util;
+package de.spexmc.mc.navigator.util;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import de.spexmc.mc.template.Navigator;
-import de.spexmc.mc.template.commands.TestCommand;
-import de.spexmc.mc.template.listener.TestEvent;
-import de.spexmc.mc.template.storage.Data;
-import de.spexmc.mc.template.storage.Messages;
+import de.spexmc.mc.navigator.Navigator;
+import de.spexmc.mc.navigator.commands.Navi;
+import de.spexmc.mc.navigator.commands.Waypoint;
+import de.spexmc.mc.navigator.listener.InventoryEvents;
+import de.spexmc.mc.navigator.storage.Data;
+import de.spexmc.mc.navigator.storage.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 
 /**
- * Created by Lara on 26.02.2019 for template
+ * Created by Lara on 26.02.2019 for navigator
  */
 public final class Registerer {
 
@@ -41,7 +43,7 @@ public final class Registerer {
 
   private static void registerEvents() {
     // Insert Events here
-    final List<Listener> listeners = Arrays.asList(new TestEvent());
+    final List<Listener> listeners = Collections.singletonList(new InventoryEvents());
     for (Listener listener : listeners) {
       Bukkit.getPluginManager().registerEvents(listener, Navigator.getInstance());
     }
@@ -49,7 +51,7 @@ public final class Registerer {
 
   private static void registerCommands() {
     // Insert Commands here
-    final List<CommandExecutor> commands = Arrays.asList(new TestCommand());
+    final List<CommandExecutor> commands = Arrays.asList(new Navi(), new Waypoint());
     for (CommandExecutor commandExecutor : commands) {
       final Class<? extends CommandExecutor> commandExecutorClass = commandExecutor.getClass();
       final String commandName = commandExecutorClass.getSimpleName().toLowerCase();
@@ -58,7 +60,7 @@ public final class Registerer {
   }
 
   /*private static void registerCommands() {
-    final Reflections reflections = new Reflections("de.spexmc.mc.template.commands");
+    final Reflections reflections = new Reflections("de.spexmc.mc.navigator.commands");
     for (Class<? extends CommandExecutor> commandClass : reflections.getSubTypesOf(CommandExecutor.class)) {
       final String name = commandClass.getSimpleName().toLowerCase();
       try {
@@ -70,7 +72,7 @@ public final class Registerer {
   }
 
   private static void registerEvents() {
-    final Reflections reflections = new Reflections("de.spexmc.mc.template.listener");
+    final Reflections reflections = new Reflections("de.spexmc.mc.navigator.listener");
     for (Class<? extends Listener> listenerClass : reflections.getSubTypesOf(Listener.class)) {
       try {
         Bukkit.getPluginManager().registerEvents(listenerClass.newInstance(), Navigator.getInstance());

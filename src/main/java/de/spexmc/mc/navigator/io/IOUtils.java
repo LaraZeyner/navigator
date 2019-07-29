@@ -1,4 +1,4 @@
-package de.spexmc.mc.template.io;
+package de.spexmc.mc.navigator.io;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.net.URLConnection;
 import java.nio.charset.Charset;
 
 /**
- * Created by Lara on 23.07.2019 for template
+ * Created by Lara on 23.07.2019 for navigator
  */
 public final class IOUtils {
   public static void readURL(StringBuilder builder, URLConnection connection) throws IOException {

@@ -1,17 +1,17 @@
-package de.spexmc.mc.template;
+package de.spexmc.mc.navigator;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import de.spexmc.mc.template.io.sql.SQLManager;
-import de.spexmc.mc.template.storage.Data;
-import de.spexmc.mc.template.storage.Messages;
-import de.spexmc.mc.template.util.Registerer;
+import de.spexmc.mc.navigator.io.sql.SQLManager;
+import de.spexmc.mc.navigator.storage.Data;
+import de.spexmc.mc.navigator.storage.Messages;
+import de.spexmc.mc.navigator.util.Registerer;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * Created by Lara on 26.02.2019 for template
- * Replace all template and Navigator of Classnames, Variablenames, Packagenames, etc with your projectname
+ * Created by Lara on 26.02.2019 for navigator
+ * Replace all navigator and Navigator of Classnames, Variablenames, Packagenames, etc with your projectname
  */
 public class Navigator extends JavaPlugin {
   private static Navigator instance;

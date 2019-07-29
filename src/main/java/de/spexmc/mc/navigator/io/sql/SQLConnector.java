@@ -1,4 +1,4 @@
-package de.spexmc.mc.template.io.sql;
+package de.spexmc.mc.navigator.io.sql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,14 +9,14 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import de.spexmc.mc.template.Navigator;
-import de.spexmc.mc.template.io.FileManager;
-import de.spexmc.mc.template.storage.Const;
-import de.spexmc.mc.template.storage.Data;
-import de.spexmc.mc.template.storage.Messages;
+import de.spexmc.mc.navigator.Navigator;
+import de.spexmc.mc.navigator.io.FileManager;
+import de.spexmc.mc.navigator.storage.Const;
+import de.spexmc.mc.navigator.storage.Data;
+import de.spexmc.mc.navigator.storage.Messages;
 
 /**
- * Created by Lara on 20.07.2019 for template
+ * Created by Lara on 20.07.2019 for navigator
  */
 public class SQLConnector {
   private final Logger logger = Logger.getLogger(getClass().getName());
@@ -47,8 +47,17 @@ public class SQLConnector {
 
   void init(Connection connection) {
     if (connection != null) {
-      try (final PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS Navigator" +
-          "(Spalte1 VARCHAR(8))")) {
+      try (final PreparedStatement stmt = connection.prepareStatement(
+          "CREATE TABLE IF NOT EXISTS roleplaywaypoints(" +
+              "name     VARCHAR(32) NOT NULL, " +
+              "typename VARCHAR(16) NOT NULL, " +
+              "x        DOUBLE      NOT NULL, " +
+              "y        DOUBLE      NOT NULL," +
+              "z        DOUBLE      NOT NULL," +
+              "world    VARCHAR(16) NOT NULL," +
+              "PRIMARY KEY (name), " +
+              "UNIQUE (name) " +
+              ");")) {
         stmt.executeUpdate();
 
       } catch (SQLException ex) {

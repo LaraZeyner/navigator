@@ -1,4 +1,4 @@
-package de.spexmc.mc.template.io;
+package de.spexmc.mc.navigator.io;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,12 +12,12 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import de.spexmc.mc.template.Navigator;
-import de.spexmc.mc.template.storage.Data;
-import de.spexmc.mc.template.storage.Messages;
+import de.spexmc.mc.navigator.Navigator;
+import de.spexmc.mc.navigator.storage.Data;
+import de.spexmc.mc.navigator.storage.Messages;
 
 /**
- * Created by Lara on 26.02.2019 for template
+ * Created by Lara on 26.02.2019 for navigator
  */
 public final class FileManager {
   private static final Logger logger;

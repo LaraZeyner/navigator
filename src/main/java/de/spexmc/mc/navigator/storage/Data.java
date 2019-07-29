@@ -1,13 +1,13 @@
-package de.spexmc.mc.template.storage;
+package de.spexmc.mc.navigator.storage;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
-import de.spexmc.mc.template.io.sql.SQLManager;
+import de.spexmc.mc.navigator.io.sql.SQLManager;
+import de.spexmc.mc.navigator.model.WaypointModel;
 
 /**
- * Created by Lara on 26.02.2019 for template
+ * Created by Lara on 26.02.2019 for navigator
  */
 public final class Data {
   private static Data instance;
@@ -33,22 +33,22 @@ public final class Data {
     Data.forceDisable = forceDisable;
   }
 
-  private final Map<UUID, String> cache;
+  private final List<WaypointModel> waypoints;
   private final SQLManager sql;
 
   private Data() {
-    this.cache = new HashMap<>();
+    this.waypoints = new ArrayList<>();
     this.sql = new SQLManager();
     forceDisable = false;
   }
 
   //<editor-fold desc="getter and setter">
-  public Map<UUID, String> getCache() {
-    return cache;
-  }
-
   public SQLManager getSql() {
     return sql;
+  }
+
+  public List<WaypointModel> getWaypoints() {
+    return waypoints;
   }
   //</editor-fold>
 }
