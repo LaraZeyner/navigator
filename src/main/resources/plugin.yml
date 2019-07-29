@@ -1,0 +1,7 @@
+name: Template
+version: 1.4.6
+authors: [SpexMC-Entwicklerteam]
+
+main: de.spexmc.mc.template.Template
+commands:
+  testcommand:
