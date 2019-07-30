@@ -42,6 +42,7 @@ class WaypointSQLHandler extends SQLConnector {
       statement.setDouble(4, waypoint.getY());
       statement.setDouble(5, waypoint.getZ());
       statement.setString(6, waypoint.getWorldName());
+      statement.executeUpdate();
     } catch (SQLException ex) {
       Messenger.administratorMessage(ex.getMessage());
     }
@@ -51,6 +52,7 @@ class WaypointSQLHandler extends SQLConnector {
     try (final PreparedStatement statement = getConnection().prepareStatement(
         "DELETE FROM " + Const.WAYPOINTSTABLE + " WHERE name = ?")) {
       statement.setString(1, waypoint.getName());
+      statement.executeUpdate();
     } catch (SQLException ex) {
       Messenger.administratorMessage(ex.getMessage());
     }

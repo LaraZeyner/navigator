@@ -14,12 +14,12 @@ public final class Messages {
   public static final String SUCCESSFULLY_ENABLED = "Navigator wurde erfolgreich gestartet.";
 
   // General
-  public static final String PREFIX = "§6Navigator§7 | ";
+  public static final String PREFIX = "§6" + Const.PLUGIN_NAME + "§7 | ";
   public static final String NOT_A_PLAYER = "Du darfst den Command nicht ausführen.";
   public static final String NO_WAYPOINTS_CREATED = "Es wurden noch keine Wegpunkte erstellt.";
   public static final String SYNTAX_WAYPOINT = "Benutze §e/waypoint §b<create/view/delete> §c<Nickname>";
   public static final String NO_ITEM_IN_HAND = "Du musst einen Gegenstand in der Hand halten.";
   public static final String WAYPOINT_CREATED = "Wegpunkt erfolgreich erstellt.";
   public static final String WAYPOINT_DELETED = "Wegpunkt erfolgreich entfernt.";
+  public static final String NAME_TOO_LONG = "Der Name ist zu lang";
 }
-

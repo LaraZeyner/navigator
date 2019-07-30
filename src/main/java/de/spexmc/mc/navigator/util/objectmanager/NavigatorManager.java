@@ -1,6 +1,5 @@
 package de.spexmc.mc.navigator.util.objectmanager;
 
-import java.util.Arrays;
 import java.util.List;
 
 import de.spexmc.mc.navigator.model.WaypointModel;
@@ -47,16 +46,26 @@ public final class NavigatorManager {
     return inventory;
   }
 
-  public static boolean checkNaviInInventory(Player player) {
-    return Arrays.stream(player.getInventory().getContents())
-        .anyMatch(item -> item.getItemMeta().getDisplayName().equals(Const.NAVIGATOR_TITLE));
+  public static boolean checkNaviNotInInventory(Player player) {
+    for (ItemStack item : player.getInventory().getContents()) {
+      if (item != null && item.equals(getNavi())) {
+        return false;
+      }
+    }
+    return true;
   }
 
   public static ItemStack getNavi() {
     final ItemStack item = new ItemStack(Material.COMPASS);
     final ItemMeta info = item.getItemMeta();
     info.setDisplayName(Const.NAVIGATOR_TITLE);
+    item.setItemMeta(info);
     return item;
+  }
+
+  public static boolean isItemANavigatorItem(ItemStack item) {
+    final List<WaypointModel> waypoints = Data.getInstance().getWaypoints();
+    return waypoints.stream().anyMatch(waypoint -> waypoint.getItem().equals(item));
   }
 
 }

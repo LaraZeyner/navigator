@@ -95,10 +95,6 @@ public class SQLConnector {
     return connection;
   }
 
-  SQLData getSqlData() {
-    return sqlData;
-  }
-
   private Logger getLogger() {
     return logger;
   }

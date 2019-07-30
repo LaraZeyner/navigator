@@ -9,6 +9,7 @@ import de.spexmc.mc.navigator.storage.Const;
 import de.spexmc.mc.navigator.storage.Messages;
 import de.spexmc.mc.navigator.util.Messenger;
 import de.spexmc.mc.navigator.util.objectmanager.NavigatorManager;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,7 +21,8 @@ import org.bukkit.entity.Player;
 public class Waypoint implements CommandExecutor {
   @Override
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-    if (checkPlayer(sender) && sender.isOp() && checkSyntax((Player) sender, args) && checkLength(args) && checkItem((Player) sender)) {
+    if (checkPlayer(sender) && sender.isOp() && checkSyntax((Player) sender, args) &&
+        checkLength(args, (Player) sender) && checkItem((Player) sender)) {
       final String name = determineName(args);
       if (args[0].equalsIgnoreCase("create") && NavigatorManager.determineWaypoint(name) == null) {
         evaluateCreateWaypoint((Player) sender, name);
@@ -57,23 +59,28 @@ public class Waypoint implements CommandExecutor {
   }
 
   private boolean checkItem(Player sender) {
-    if (sender.getItemInHand().getAmount() == 0) {
+    if (sender.getItemInHand() == null || sender.getItemInHand().getType().equals(Material.AIR)) {
       Messenger.sendMessage(sender, Messages.NO_ITEM_IN_HAND);
       return false;
     }
     return true;
   }
 
-  private boolean checkLength(String[] args) {
+  private boolean checkLength(String[] args, Player player) {
     final int length = IntStream.range(1, args.length).map(i -> args[i].length()).sum();
-    return length >= Const.NAME_LENGTH;
+    if (length > Const.NAME_LENGTH) {
+      Messenger.sendMessage(player, Messages.NAME_TOO_LONG);
+      return false;
+    }
+    return true;
   }
 
   private boolean checkSyntax(Player sender, String[] args) {
     if (args.length < 2) {
       Messenger.sendMessage(sender, Messages.SYNTAX_WAYPOINT);
+      return false;
     }
-    return false;
+    return true;
   }
 
   private boolean checkPlayer(CommandSender sender) {

@@ -9,7 +9,7 @@ import org.bukkit.Location;
  * Created by Lara on 29.07.2019 for navigator
  */
 public class WaypointModelImpl implements Serializable {
-  private static final long serialVersionUID = 8092292560412437300L;
+  private static final long serialVersionUID = -424658313503942980L;
 
   private final double x, y, z;
   private final String name, worldName;

@@ -3,7 +3,6 @@ package de.spexmc.mc.navigator.io;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -41,33 +40,6 @@ public final class FileManager {
       logger.log(Level.SEVERE, ex.getMessage());
     }
     return null;
-  }
-
-  public static String get(File file, String key) {
-    return loadConfig(file).get(key);
-  }
-
-  public static File getDataFolder() {
-    return new File("plugins" + File.separator + "config");
-  }
-
-  public static void writeIntoConfig(File file, Map<String, String> toWrite) {
-    try (final FileOutputStream fileOutputStream = new FileOutputStream(file)) {
-      final Properties properties = collectProperties(toWrite);
-      properties.store(fileOutputStream, "Properties");
-
-    } catch (IOException ex) {
-      logger.log(Level.SEVERE, ex.getMessage());
-    }
-  }
-
-  private static Properties collectProperties(Map<String, String> toWrite) {
-    final Properties properties = new Properties();
-    for (String key : toWrite.keySet()) {
-      properties.setProperty(key, toWrite.get(key));
-    }
-
-    return properties;
   }
 
   private static Map<String, String> collectData(Properties config) {

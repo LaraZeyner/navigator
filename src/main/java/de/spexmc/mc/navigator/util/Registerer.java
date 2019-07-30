@@ -2,19 +2,15 @@ package de.spexmc.mc.navigator.util;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import de.spexmc.mc.navigator.Navigator;
-import de.spexmc.mc.navigator.commands.Navi;
-import de.spexmc.mc.navigator.commands.Waypoint;
-import de.spexmc.mc.navigator.listener.InventoryEvents;
+import de.spexmc.mc.navigator.storage.Const;
 import de.spexmc.mc.navigator.storage.Data;
 import de.spexmc.mc.navigator.storage.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
+import org.reflections.Reflections;
 
 /**
  * Created by Lara on 26.02.2019 for navigator
@@ -41,44 +37,28 @@ public final class Registerer {
     }
   }
 
-  private static void registerEvents() {
-    // Insert Events here
-    final List<Listener> listeners = Collections.singletonList(new InventoryEvents());
-    for (Listener listener : listeners) {
-      Bukkit.getPluginManager().registerEvents(listener, Navigator.getInstance());
-    }
-  }
-
   private static void registerCommands() {
-    // Insert Commands here
-    final List<CommandExecutor> commands = Arrays.asList(new Navi(), new Waypoint());
-    for (CommandExecutor commandExecutor : commands) {
-      final Class<? extends CommandExecutor> commandExecutorClass = commandExecutor.getClass();
-      final String commandName = commandExecutorClass.getSimpleName().toLowerCase();
-      Navigator.getInstance().getCommand(commandName).setExecutor(commandExecutor);
-    }
-  }
-
-  /*private static void registerCommands() {
-    final Reflections reflections = new Reflections("de.spexmc.mc.navigator.commands");
+    final Reflections reflections =
+        new Reflections("de.spexmc.mc." + Const.PLUGIN_NAME.toLowerCase() + ".commands");
     for (Class<? extends CommandExecutor> commandClass : reflections.getSubTypesOf(CommandExecutor.class)) {
       final String name = commandClass.getSimpleName().toLowerCase();
       try {
-        Navigator.getInstance().getCommand(name).setExecutor(commandClass.newInstance());
+        Navigator.getInstance().getCommand(name).setExecutor(commandClass.getConstructor().newInstance());
       } catch (ReflectiveOperationException ignored) {
-        logger.warning("Command " + name + " could not loaded.");
+        Messenger.administratorMessage("Command " + name + " could not loaded.");
       }
     }
   }
 
   private static void registerEvents() {
-    final Reflections reflections = new Reflections("de.spexmc.mc.navigator.listener");
+    final Reflections reflections =
+        new Reflections("de.spexmc.mc." + Const.PLUGIN_NAME.toLowerCase() + ".listener");
     for (Class<? extends Listener> listenerClass : reflections.getSubTypesOf(Listener.class)) {
       try {
-        Bukkit.getPluginManager().registerEvents(listenerClass.newInstance(), Navigator.getInstance());
+        Bukkit.getPluginManager().registerEvents(listenerClass.getConstructor().newInstance(), Navigator.getInstance());
       } catch (ReflectiveOperationException ignored) {
-        logger.warning("Event " + listenerClass.getName() + " could not loaded.");
+        Messenger.administratorMessage("Event " + listenerClass.getName() + " could not loaded.");
       }
     }
-  }*/
+  }
 }

@@ -4,6 +4,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import de.spexmc.mc.navigator.storage.Messages;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -31,8 +33,10 @@ public final class Messenger {
     player.sendMessage(Messages.PREFIX + msg);
   }
 
-  public static void broadcast(String msg) {
-    Bukkit.broadcastMessage(Messages.PREFIX + msg);
+  public static void sendMessage(Player player, String message, String command) {
+    final TextComponent text = new TextComponent(message);
+    text.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command));
+    player.spigot().sendMessage(text);
   }
 
 }

@@ -15,7 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
  * Created by Lara on 29.07.2019 for navigator
  */
 public class WaypointModel extends WaypointModelImpl {
-  private static final long serialVersionUID = -7959715194414957189L;
+  private static final long serialVersionUID = -1820083224071241661L;
 
   private final Material type;
 
@@ -53,5 +53,6 @@ public class WaypointModel extends WaypointModelImpl {
 
   public void view(Player player) {
     Messenger.sendMessage(player, toString());
+    Messenger.sendMessage(player, "§5Klicken zum Teleportieren", "/tp " + getName());
   }
 }
