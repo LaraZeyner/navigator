@@ -6,7 +6,7 @@
 
     <groupId>de.spexmc.mc</groupId>
     <artifactId>roleplay.navigator</artifactId>
-    <version>1.4.0-SNAPSHOT</version>
+    <version>1.4.3-SNAPSHOT</version>
 
     <packaging>jar</packaging>
 
@@ -18,7 +18,7 @@
 
 
     <build>
-        <finalName>Navigator-1.4.0</finalName>
+        <finalName>Navigator-1.4.3</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
 
         <resources>

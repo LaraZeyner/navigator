@@ -15,6 +15,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class ConnectionEvents implements Listener {
   @EventHandler
   public void onJoin(PlayerJoinEvent joinEvent) {
+    Data.getInstance().getSql().updateOnStart();
+
     final Player eventPlayer = joinEvent.getPlayer();
     if (NavigatorManager.checkNaviNotInInventory(eventPlayer) && checkWaypointsExists(eventPlayer)) {
       eventPlayer.getInventory().addItem(NavigatorManager.getNavi());

@@ -26,6 +26,7 @@ public class WaypointModel extends WaypointModelImpl {
 
   public ItemStack getItem() {
     final ItemStack item = new ItemStack(type);
+    item.setAmount(1);
     final ItemMeta info = item.getItemMeta();
     info.setDisplayName(getName());
     info.setLore(Arrays.asList("Welt:" + getWorldName(), "X -> " + getX(), "Y -> " + getY(), "Z -> " + getZ(), "§1 Klicken zum Teleportieren."));

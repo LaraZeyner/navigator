@@ -27,7 +27,7 @@ public class InventoryEvents implements Listener {
 
   @EventHandler
   public void onInventoryDrag(InventoryDragEvent dragEvent) {
-    if (dragEvent.getInventory().equals(NavigatorManager.determineInventory()) ||
+    if (NavigatorManager.isInventoryNavigator(dragEvent.getInventory()) ||
         dragEvent.getCursor().equals(NavigatorManager.getNavi()) ||
         dragEvent.getOldCursor().equals(NavigatorManager.getNavi())) {
       dragEvent.setCancelled(true);
@@ -37,7 +37,7 @@ public class InventoryEvents implements Listener {
 
   @EventHandler
   public void onInventoryClick(InventoryClickEvent clickEvent) {
-    if (NavigatorManager.isItemANavigatorItem(clickEvent.getCursor())) {
+    if (NavigatorManager.isInventoryNavigator(clickEvent.getClickedInventory())) {
       performClickedOnItem(clickEvent);
     }
 
@@ -49,12 +49,14 @@ public class InventoryEvents implements Listener {
   }
 
   private void performClickedOnItem(InventoryClickEvent clickEvent) {
-    final String locationName = clickEvent.getCursor().getItemMeta().getDisplayName();
+    final String locationName = clickEvent.getCurrentItem().getItemMeta().getDisplayName();
+
     final WaypointModel waypoint = NavigatorManager.determineWaypoint(locationName);
     final Player target = (Player) clickEvent.getWhoClicked();
     target.setCompassTarget(waypoint.getLocation());
     target.closeInventory();
     Messenger.sendMessage(target, "Dein Navi§b SpexNAV-100§7 wurde auf den Stadtteil §c" + locationName +
         "§7 eingestellt.");
+    clickEvent.setCancelled(true);
   }
 }

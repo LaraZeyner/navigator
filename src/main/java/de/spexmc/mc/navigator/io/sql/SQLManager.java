@@ -22,6 +22,7 @@ public class SQLManager extends WaypointSQLHandler {
   public void updateOnStart() {
     final Data data = Data.getInstance();
     final List<WaypointModel> waypointList = data.getSql().getWaypoints();
+    data.getWaypoints().clear();
     data.getWaypoints().addAll(waypointList);
   }
 }

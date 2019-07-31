@@ -30,7 +30,8 @@ public class ItemEvents implements Listener {
 
   @EventHandler
   public void onInventoryMove(InventoryMoveItemEvent moveItemEvent) {
-    if (NavigatorManager.isItemANavigatorItem(moveItemEvent.getItem())) {
+    if (NavigatorManager.isInventoryNavigator(moveItemEvent.getInitiator()) ||
+        NavigatorManager.isInventoryNavigator(moveItemEvent.getDestination())) {
       moveItemEvent.setCancelled(true);
     }
 

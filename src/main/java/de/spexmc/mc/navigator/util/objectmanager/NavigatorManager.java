@@ -67,7 +67,12 @@ public final class NavigatorManager {
 
   public static boolean isItemANavigatorItem(ItemStack item) {
     final List<WaypointModel> waypoints = Data.getInstance().getWaypoints();
-    return waypoints.stream().anyMatch(waypoint -> waypoint.getItem().equals(item));
+    return waypoints.stream().anyMatch(waypoint -> waypoint.getItem().getItemMeta().equals(item.getItemMeta()));
+  }
+
+
+  public static boolean isInventoryNavigator(Inventory inventory) {
+    return determineInventory().getTitle().equals(inventory.getTitle());
   }
 
 }
