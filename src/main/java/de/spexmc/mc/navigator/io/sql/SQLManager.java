@@ -16,7 +16,6 @@ public class SQLManager extends WaypointSQLHandler {
 
   @Override
   public void disconnect() {
-    updateOnStop();
     super.disconnect();
   }
 
@@ -24,9 +23,5 @@ public class SQLManager extends WaypointSQLHandler {
     final Data data = Data.getInstance();
     final List<WaypointModel> waypointList = data.getSql().getWaypoints();
     data.getWaypoints().addAll(waypointList);
-  }
-
-  private void updateOnStop() {
-
   }
 }

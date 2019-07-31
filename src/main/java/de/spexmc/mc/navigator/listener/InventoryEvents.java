@@ -19,7 +19,7 @@ public class InventoryEvents implements Listener {
   @EventHandler
   public void onInteract(PlayerInteractEvent interactEvent) {
     final Player eventPlayer = interactEvent.getPlayer();
-    final ItemStack itemInHand = eventPlayer.getItemInHand();
+    final ItemStack itemInHand = eventPlayer.getInventory().getItemInMainHand();
     if (itemInHand.equals(NavigatorManager.getNavi())) {
       eventPlayer.openInventory(NavigatorManager.determineInventory());
     }
@@ -42,7 +42,7 @@ public class InventoryEvents implements Listener {
     }
 
     final HumanEntity humanEntity = clickEvent.getWhoClicked();
-    final ItemStack itemInHand = humanEntity.getItemInHand();
+    final ItemStack itemInHand = humanEntity.getInventory().getItemInMainHand();
     if (itemInHand.equals(NavigatorManager.getNavi())) {
       humanEntity.openInventory(NavigatorManager.determineInventory());
     }

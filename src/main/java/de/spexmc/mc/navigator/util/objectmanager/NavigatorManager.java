@@ -39,6 +39,8 @@ public final class NavigatorManager {
   }
 
   public static Inventory determineInventory() {
+    Data.getInstance().getSql().updateOnStart();
+
     final List<WaypointModel> waypoints = Data.getInstance().getWaypoints();
     final int size = waypoints.size() / 9 * 9 + 9;
     final Inventory inventory = Bukkit.createInventory(null, size, Const.NAVIGATOR_TITLE);

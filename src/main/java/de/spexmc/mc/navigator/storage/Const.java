@@ -8,7 +8,8 @@ import java.io.File;
 public final class Const {
   public static final int NAME_LENGTH = 32;
 
-  public static final File SQL_CONFIG = new File("plugins" + File.separator + "config" + File.separator + "sql.properties");
+  public static final File SQL_CONFIG =
+      new File("plugins" + File.separator + "config" + File.separator + "sql.properties");
 
   public static final String PLUGIN_NAME = "Navigator";
   public static final String WAYPOINTSTABLE = "roleplaywaypoints";

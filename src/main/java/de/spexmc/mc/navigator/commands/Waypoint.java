@@ -14,11 +14,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * Created by Lara on 29.07.2019 for navigator
  */
-public class Waypoint implements CommandExecutor {
+public class Waypoint extends CommandUtils implements CommandExecutor {
   @Override
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
     if (checkPlayer(sender) && sender.isOp() && checkSyntax((Player) sender, args) &&
@@ -47,7 +48,8 @@ public class Waypoint implements CommandExecutor {
   }
 
   private void evaluateCreateWaypoint(Player sender, String name) {
-    final WaypointModel waypoint = new WaypointModel(name, sender.getLocation(), sender.getItemInHand().getType());
+    final ItemStack itemInHand = sender.getInventory().getItemInMainHand();
+    final WaypointModel waypoint = new WaypointModel(name, sender.getLocation(), itemInHand.getType());
     waypoint.create();
     Messenger.sendMessage(sender, Messages.WAYPOINT_CREATED);
   }
@@ -59,7 +61,8 @@ public class Waypoint implements CommandExecutor {
   }
 
   private boolean checkItem(Player sender) {
-    if (sender.getItemInHand() == null || sender.getItemInHand().getType().equals(Material.AIR)) {
+    final ItemStack itemInHand = sender.getInventory().getItemInMainHand();
+    if (itemInHand == null || itemInHand.getType().equals(Material.AIR)) {
       Messenger.sendMessage(sender, Messages.NO_ITEM_IN_HAND);
       return false;
     }
@@ -83,11 +86,4 @@ public class Waypoint implements CommandExecutor {
     return true;
   }
 
-  private boolean checkPlayer(CommandSender sender) {
-    if (!(sender instanceof Player)) {
-      sender.sendMessage(Messages.PREFIX + Messages.NOT_A_PLAYER);
-      return false;
-    }
-    return true;
-  }
 }
