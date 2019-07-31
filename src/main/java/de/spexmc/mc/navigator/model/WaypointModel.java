@@ -29,7 +29,7 @@ public class WaypointModel extends WaypointModelImpl {
     item.setAmount(1);
     final ItemMeta info = item.getItemMeta();
     info.setDisplayName(getName());
-    info.setLore(Arrays.asList("Welt:" + getWorldName(), "X -> " + getX(), "Y -> " + getY(), "Z -> " + getZ(), "§1 Klicken zum Teleportieren."));
+    info.setLore(Arrays.asList("Welt:" + getWorldName(), "X -> " + getX(), "Y -> " + getY(), "Z -> " + getZ(), "§1 Klicken um Navigation zu starten"));
     item.setItemMeta(info);
     return item;
   }
@@ -54,6 +54,6 @@ public class WaypointModel extends WaypointModelImpl {
 
   public void view(Player player) {
     Messenger.sendMessage(player, toString());
-    Messenger.sendMessage(player, "§5Klicken zum Teleportieren", "/tp " + getName());
+    Messenger.sendMessage(player, "§5Klicken zum Teleportieren", "/teleport " + getName());
   }
 }
